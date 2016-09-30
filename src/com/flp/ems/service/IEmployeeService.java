@@ -8,7 +8,7 @@ import com.flp.ems.domain.Employee;
 
 public interface IEmployeeService {
 
-	public void AddEmployee(Map<Integer, String> mapValues);
+	public boolean AddEmployee(Map<Integer, String> mapValues);
 
 	public void RemoveEmployee(int emp_id);
 

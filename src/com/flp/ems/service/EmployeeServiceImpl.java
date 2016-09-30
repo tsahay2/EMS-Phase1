@@ -20,7 +20,7 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 	Date dateOfBirth = null;;
 
 	@Override
-	public void AddEmployee(Map<Integer, String> mapValues) {
+	public boolean AddEmployee(Map<Integer, String> mapValues) {
 		// TODO Auto-generated method stub
 
 		DateFormat dateFormat = new SimpleDateFormat("DD/MM/YYYY");
@@ -39,12 +39,14 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		Employee emp = new Employee(mapValues.get(1), Double.valueOf(mapValues.get(2)), mapValues.get(3), dateOfBirth,
 				dateOfJoining, Integer.valueOf(mapValues.get(6)), Integer.valueOf(mapValues.get(7)),
 				Integer.valueOf(mapValues.get(8)));
 		// EmployeeDaoImplForList empDaoList = new EmployeeDaoImplForList();
 
-		empDao.AddEmployee(emp);
+		boolean status = empDao.AddEmployee(emp);
+		return status;
 
 	}
 
@@ -70,8 +72,7 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 		emp.setDept_id(Integer.parseInt(newValues.get(6)));
 		emp.setProject_id(Integer.parseInt(newValues.get(7)));
 		emp.setRole_id(Integer.parseInt(newValues.get(8)));
-
-		empDao.ModifyEmployee(emp_id, emp);
+		empDao.ModifyEmployee( emp);
 
 	}
 

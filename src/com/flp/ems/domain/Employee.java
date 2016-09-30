@@ -1,5 +1,6 @@
 package com.flp.ems.domain;
 
+import java.util.Comparator;
 import java.util.Date;
 
 public class Employee implements Cloneable {
@@ -137,6 +138,15 @@ public class Employee implements Cloneable {
 	public int hashCode() {
 		// TODO Auto-generated method stub
 		return super.hashCode();
+	}
+	
+	class MyComparator implements Comparator{
+		@Override
+		public int compare(Object o1, Object o2) {
+			int diff =((Integer) o1)-((Integer) o2);
+			
+			return -diff;
+		}
 	}
 
 }

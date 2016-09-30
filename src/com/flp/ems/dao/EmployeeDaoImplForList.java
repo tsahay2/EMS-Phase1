@@ -1,21 +1,32 @@
 package com.flp.ems.dao;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.TreeSet;
 
+import com.flp.ems.comparator.CompareById;
 import com.flp.ems.domain.Employee;
 
 public class EmployeeDaoImplForList implements IEmployeeDao {
 
 	static List<Employee> listOfEmployees = new ArrayList<Employee>();
+	static Comparator comparator = new CompareById();
+	static TreeSet tree = new TreeSet();
 
 	@Override
-	public void AddEmployee(Employee emp) {
+	public boolean AddEmployee(Employee emp) {
 		// TODO Auto-generated method stub
 
-		listOfEmployees.add(emp);
-		System.out.println("Employee Added SuccessFully !");
+		if (listOfEmployees.add(emp))
+		{	
+			tree.add(emp.getEmp_id());
+			return true;
+		
+		}
+		
 
+		return false;
 	}
 
 	@Override
@@ -34,9 +45,10 @@ public class EmployeeDaoImplForList implements IEmployeeDao {
 	}
 
 	@Override
-	public void ModifyEmployee(int id, Employee emp) {
+	public void ModifyEmployee(Employee emp) {
 		// TODO Auto-generated method stub
 		// System.out.println(id);
+		int id = emp.getEmp_id();
 		listOfEmployees.set(--id, emp);
 		System.out.println("Modified successfully!");
 
@@ -47,7 +59,7 @@ public class EmployeeDaoImplForList implements IEmployeeDao {
 		// TODO Auto-generated method stub
 
 		Integer id1 = id;
-		for (Employee emp : listOfEmployees) {
+		/*for (Employee emp : listOfEmployees) {
 
 			if (id1.equals(emp.getEmp_id())) {
 
@@ -60,7 +72,14 @@ public class EmployeeDaoImplForList implements IEmployeeDao {
 
 			}
 
+		}*/
+		
+		if(tree.contains(id1)){
+			Employee emp = listOfEmployees.get(--id1);
+			return emp;
+			
 		}
+		
 		return null;
 
 	}
@@ -71,6 +90,11 @@ public class EmployeeDaoImplForList implements IEmployeeDao {
 
 		return listOfEmployees;
 
+	}
+	
+	public void printTree(){
+		
+		System.out.println(tree);
 	}
 
 }

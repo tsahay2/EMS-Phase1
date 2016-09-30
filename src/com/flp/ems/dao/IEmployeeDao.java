@@ -7,11 +7,11 @@ import com.flp.ems.domain.Employee;
 
 public interface IEmployeeDao {
 	
-	public void AddEmployee(Employee emp);
+	public boolean AddEmployee(Employee emp);
 
 	public void RemoveEmployee(int emp_id);
 
-	public void ModifyEmployee(int id,Employee emp);
+	public void ModifyEmployee(Employee emp);
 
 	public Employee SearchEmployee(int id);
 	
