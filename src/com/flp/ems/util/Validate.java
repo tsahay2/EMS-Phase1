@@ -28,7 +28,7 @@ public class Validate {
 	public static boolean validateDate(String date){
 		
 		
-		System.out.println(date);
+		
 		if(Pattern.matches("[0-9]{2}/[0-9]{2}/[0-9]{4}", date))
 			return true;
 		return false;
