@@ -1,5 +1,7 @@
 package com.flp.ems.view;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +43,7 @@ public class UserInteraction {
 
 	}
 
-	public void ModifyEmployee() {
+	public void ModifyEmployee() throws IOException, SQLException {
 
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
 
@@ -58,11 +60,15 @@ public class UserInteraction {
 		getRoleId(inputValues);
 		empService.AddEmployee(inputValues);
 
-		empService.ModifyEmployee(id, inputValues);
+		boolean status = empService.ModifyEmployee(id, inputValues);
+		if (status)
+			System.out.println("Employee Details Modified");
+		else
+			System.out.println("Sorry! Try again!");
 
 	}
 
-	public void SearchEmployee() {
+	public void SearchEmployee() throws IOException, SQLException {
 
 		System.out.println("Enter the Employee Id : ");
 		int id = sc.nextInt();
@@ -72,7 +78,7 @@ public class UserInteraction {
 
 	}
 
-	public void getAllEmployee() {
+	public void getAllEmployee() throws SQLException, IOException {
 
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
 		List<String> listOfEmployee = empService.getAllEmployee();
@@ -82,18 +88,22 @@ public class UserInteraction {
 			System.out.println(emp);
 
 		}
-		
+
 		EmployeeDaoImplForList dao = new EmployeeDaoImplForList();
 		dao.printTree();
 
 	}
 
-	public void RemoveEmployee() {
+	public void RemoveEmployee() throws IOException, SQLException {
 
 		System.out.println("Enter the Employee Id : ");
 		int emp_id = sc.nextInt();
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
-		empService.RemoveEmployee(emp_id);
+		boolean status = empService.RemoveEmployee(emp_id);
+		if (status)
+			System.out.println("Employee deleted successfully!\n");
+		else
+			System.out.println("\n Sorry there was an error!");
 
 	}
 

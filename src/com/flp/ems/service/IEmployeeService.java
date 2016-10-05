@@ -1,5 +1,7 @@
 package com.flp.ems.service;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,13 +12,13 @@ public interface IEmployeeService {
 
 	public boolean AddEmployee(Map<Integer, String> mapValues);
 
-	public void RemoveEmployee(int emp_id);
+	public boolean RemoveEmployee(int emp_id) throws IOException, SQLException;
 
-	public void ModifyEmployee(int emp_id,Map<Integer,String> inputValues);
+	public boolean ModifyEmployee(int emp_id,Map<Integer,String> inputValues) throws IOException, SQLException;
 
-	public String SearchEmployee(int id);
+	public String SearchEmployee(int id) throws IOException, SQLException;
 	
-	public List<String> getAllEmployee();
+	public List<String> getAllEmployee() throws SQLException, IOException;
 
 
 }

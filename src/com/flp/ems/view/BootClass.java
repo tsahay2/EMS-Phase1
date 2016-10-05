@@ -1,22 +1,27 @@
 package com.flp.ems.view;
 
+import java.io.IOException;
 import java.sql.JDBCType;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class BootClass {
 
 	static int selection = 0;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException, SQLException {
 
 		menuSelection();
 
 	}
 
-	public static void menuSelection() {
+	public static void menuSelection() throws IOException, SQLException {
 
 		UserInteraction uiInteraction = new UserInteraction();
 
+	
+		
+		
 		while (true) {
 
 			System.out.println("Please enter the selection");

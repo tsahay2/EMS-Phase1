@@ -30,7 +30,7 @@ public class EmployeeDaoImplForList implements IEmployeeDao {
 	}
 
 	@Override
-	public void RemoveEmployee(int emp_id) {
+	public boolean RemoveEmployee(int emp_id) {
 		// TODO Auto-generated method stub
 		Integer id2 = emp_id;
 		for (Employee emp : listOfEmployees) {
@@ -41,17 +41,18 @@ public class EmployeeDaoImplForList implements IEmployeeDao {
 			}
 
 		}
+		return true;
 
 	}
 
 	@Override
-	public void ModifyEmployee(Employee emp) {
+	public boolean ModifyEmployee(Employee emp) {
 		// TODO Auto-generated method stub
 		// System.out.println(id);
 		int id = emp.getEmp_id();
 		listOfEmployees.set(--id, emp);
 		System.out.println("Modified successfully!");
-
+return true;
 	}
 
 	@Override

@@ -1,7 +1,14 @@
 package com.flp.ems.domain;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Properties;
 
 public class Employee implements Cloneable {
 
@@ -16,7 +23,8 @@ public class Employee implements Cloneable {
 	int dept_id;
 	int project_id;
 	int role_id;
-	static int cnt = 1;
+
+	
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
@@ -24,12 +32,26 @@ public class Employee implements Cloneable {
 		return super.clone();
 	}
 
-	public Employee(String name, Double phone_number, String address, Date date_of_birth, Date date_of_joining,
-			int dept_id, int project_id, int role_id) {
+	public Employee(String name, Double phone_number, String address, Date dateOfBirth, Date dateOfJoining, int dept_id,
+			int project_id, int role_id) {
 
-		this.emp_id = cnt;
 		this.dept_id = dept_id;
 		this.name = name;
+		this.phone_number = phone_number;
+		this.date_of_birth = dateOfBirth;
+		this.date_of_joining = dateOfJoining;
+		this.address = address;
+		this.dept_id = dept_id;
+		this.project_id = project_id;
+		this.role_id = role_id;
+
+	}
+
+	public Employee(int emp_id, String name, Double phone_number, String address, String kin_id, Date date_of_birth,
+			Date date_of_joining, int dept_id, int project_id, int role_id) {
+		this.emp_id = emp_id;
+		this.name = name;
+		this.kin_id = kin_id;
 		this.phone_number = phone_number;
 		this.date_of_birth = date_of_birth;
 		this.date_of_joining = date_of_joining;
@@ -37,7 +59,6 @@ public class Employee implements Cloneable {
 		this.dept_id = dept_id;
 		this.project_id = project_id;
 		this.role_id = role_id;
-		cnt++;
 	}
 
 	public int getEmp_id() {
@@ -139,12 +160,12 @@ public class Employee implements Cloneable {
 		// TODO Auto-generated method stub
 		return super.hashCode();
 	}
-	
-	class MyComparator implements Comparator{
+
+	class MyComparator implements Comparator {
 		@Override
 		public int compare(Object o1, Object o2) {
-			int diff =((Integer) o1)-((Integer) o2);
-			
+			int diff = ((Integer) o1) - ((Integer) o2);
+
 			return -diff;
 		}
 	}
