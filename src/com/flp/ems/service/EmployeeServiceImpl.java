@@ -137,6 +137,7 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 		// TODO Auto-generated method stub
 		String employee;
 		EmployeeDaoImplForList1 empDao = new EmployeeDaoImplForList1();
+		
 		Employee emp = empDao.SearchEmployee(id);
 		if (emp == null) {
 			System.out.println("Sorry, no employee found!");
