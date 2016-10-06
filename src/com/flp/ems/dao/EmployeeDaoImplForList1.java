@@ -80,6 +80,7 @@ public class EmployeeDaoImplForList1 implements IEmployeeDao {
 			modifyStatement.setInt(6, emp.getDept_id());
 			modifyStatement.setInt(7, emp.getProject_id());
 			modifyStatement.setInt(8, emp.getRole_id());
+			modifyStatement.setInt(9, emp.getEmp_id());
 			int rowsUpdated = modifyStatement.executeUpdate();
 			if (rowsUpdated == 1) {
 				return true;

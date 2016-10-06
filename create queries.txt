@@ -1,0 +1,23 @@
+create table Employee(employee_id int primary key auto_increment,
+name varchar(30),
+phone_number bigint,
+address varchar(75),
+kin_id varchar(45),
+date_of_birth date,
+date_of_joining date,
+department_id int references department(department_id),
+project_id int references project(project_id),
+role_id int references role(role_id))
+
+create table Department(department_id int primary key auto_increment,
+name varchar(30),
+description varchar(100))
+
+create table Project(project_id int primary key auto_increment,
+name varchar(30),
+description varchar(100),
+department_id int references department(department_id))
+
+create table Role(role_id int primary key auto_increment,
+name varchar(30),
+description varchar(100))

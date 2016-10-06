@@ -46,7 +46,7 @@ public class UserInteraction {
 	public void ModifyEmployee() throws IOException, SQLException {
 
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
-
+		Map<Integer, String> inputValues = new HashMap<>();
 		System.out.println("Enter the Employee Id : ");
 		int id = sc.nextInt();
 
@@ -58,7 +58,7 @@ public class UserInteraction {
 		getDepartmentId(inputValues);
 		getProjectId(inputValues);
 		getRoleId(inputValues);
-		empService.AddEmployee(inputValues);
+	
 
 		boolean status = empService.ModifyEmployee(id, inputValues);
 		if (status)
@@ -110,7 +110,7 @@ public class UserInteraction {
 	public String getName(Map<Integer, String> inputValues) {
 		while (checked) {
 			System.out.println("Enter Name :");
-			name = sc.next();
+			name = sc.nextLine();
 
 			if (validate.validateName(name)) {
 				inputValues.put(1, name);
@@ -131,6 +131,7 @@ public class UserInteraction {
 
 			System.out.println("Enter Mobile Number :");
 			phoneNumber = sc.nextLong();
+			sc.nextLine();
 			System.out.println(String.valueOf(phoneNumber));
 			if (validate.validatePhone(String.valueOf(phoneNumber))) {
 				inputValues.put(2, String.valueOf(phoneNumber));
@@ -149,7 +150,7 @@ public class UserInteraction {
 	public String getAddress(Map<Integer, String> inputValues) {
 
 		System.out.println("Enter Address:");
-		address = sc.next();
+		address = sc.nextLine();
 		inputValues.put(3, address);
 		return address;
 
@@ -160,7 +161,7 @@ public class UserInteraction {
 		checked = true;
 		while (checked) {
 			System.out.println("Enter Date Of Birth(DD/MM/YYYY):");
-			dateOfBirth = sc.next();
+			dateOfBirth = sc.nextLine();
 
 			if (validate.validateDate(dateOfBirth)) {
 				inputValues.put(4, dateOfBirth);
@@ -182,7 +183,7 @@ public class UserInteraction {
 		checked = true;
 		while (checked) {
 			System.out.println("Enter date of joining:");
-			dateOfJoining = sc.next();
+			dateOfJoining = sc.nextLine();
 
 			if (validate.validateDate(dateOfJoining)) {
 				inputValues.put(5, dateOfJoining);

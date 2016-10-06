@@ -77,6 +77,7 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 		EmployeeDaoImplForList1 empDao = new EmployeeDaoImplForList1();
 		Employee emp = empDao.SearchEmployee(emp_id);
 		if (emp != null) {
+			emp.setEmp_id(emp_id);
 			emp.setName(newValues.get(1));
 			emp.setPhone_number(Double.parseDouble(newValues.get(2)));
 			emp.setAddress(newValues.get(3));
