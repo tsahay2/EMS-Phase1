@@ -78,14 +78,51 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 		Employee emp = empDao.SearchEmployee(emp_id);
 		if (emp != null) {
 			emp.setEmp_id(emp_id);
-			emp.setName(newValues.get(1));
-			emp.setPhone_number(Double.parseDouble(newValues.get(2)));
-			emp.setAddress(newValues.get(3));
-			emp.setDate_of_birth(dateOfBirth);
-			emp.setDate_of_joining(dateOfJoining);
-			emp.setDept_id(Integer.parseInt(newValues.get(6)));
-			emp.setProject_id(Integer.parseInt(newValues.get(7)));
-			emp.setRole_id(Integer.parseInt(newValues.get(8)));
+			if (newValues.get(1).equals("")) {
+				emp.setName(emp.getName());
+			} else {
+				emp.setName(newValues.get(1));
+			}
+
+			if (newValues.get(2).equals("")) {
+				emp.setPhone_number(emp.getPhone_number());
+			} else {
+				emp.setPhone_number(Double.parseDouble(newValues.get(2)));
+			}
+
+			if (newValues.get(3).equals("")) {
+
+			} else {
+				emp.setAddress(newValues.get(3));
+			}
+
+			if (newValues.get(4).equals("")) {
+			} else {
+				emp.setDate_of_birth(dateOfBirth);
+			}
+
+			if (newValues.get(5).equals("")) {
+
+			} else {
+				emp.setDate_of_joining(dateOfJoining);
+			}
+
+			if (newValues.get(6).equals("")) {
+			} else {
+
+				emp.setDept_id(Integer.parseInt(newValues.get(6)));
+			}
+
+			if (newValues.get(7).equals("")) {
+			} else {
+				emp.setProject_id(Integer.parseInt(newValues.get(7)));
+			}
+
+			if (newValues.get(8).equals("")) {
+			} else {
+
+				emp.setRole_id(Integer.parseInt(newValues.get(8)));
+			}
 			boolean checkStatus = empDao.ModifyEmployee(emp);
 			return checkStatus;
 		} else {
@@ -96,7 +133,7 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 	}
 
 	@Override
-	public String SearchEmployee(int id) throws IOException, SQLException {
+	public String SearchEmployee(Map<Integer, String> searchParameters) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		String employee;
 		EmployeeDaoImplForList1 empDao = new EmployeeDaoImplForList1();
@@ -119,15 +156,21 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 		List<Employee> listOfEmployee;
 		List<String> allEmployeeString = new ArrayList<>();
 		listOfEmployee = empDao.getAllEmployee();
-		String singleEmpString;
-		for (Employee emp : listOfEmployee) {
 
-			singleEmpString = "ID" + emp.getEmp_id() + " Name :" + emp.getName() + " Number " + emp.getPhone_number();
-			allEmployeeString.add(singleEmpString);
+		if (listOfEmployee.size() == 0) {
+
+		} else {
+			String singleEmpString;
+			for (Employee emp : listOfEmployee) {
+
+				singleEmpString = "ID" + emp.getEmp_id() + " Name :" + emp.getName() + " Number "
+						+ emp.getPhone_number();
+				allEmployeeString.add(singleEmpString);
+			}
+
 		}
 
 		return allEmployeeString;
-
 	}
 
 	public Object clone() throws CloneNotSupportedException {

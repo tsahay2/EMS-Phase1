@@ -27,16 +27,16 @@ public class EmployeeDaoImplForList1 implements IEmployeeDao {
 		String insertQuery = props.getProperty("jdbc.query.addEmployee");
 		try (PreparedStatement insertStatement = dbConnection.prepareStatement(insertQuery)) {
 
-			insertStatement.setInt(1, emp.getEmp_id());
-			insertStatement.setString(2, emp.getName());
-			insertStatement.setDouble(3, emp.getPhone_number());
-			insertStatement.setString(4, emp.getAddress());
-			insertStatement.setString(5, emp.getKin_id());
-			insertStatement.setDate(6, new java.sql.Date(emp.getDate_of_birth().getTime()));
-			insertStatement.setDate(7, new java.sql.Date(emp.getDate_of_joining().getTime()));
-			insertStatement.setInt(8, emp.getDept_id());
-			insertStatement.setInt(9, emp.getProject_id());
-			insertStatement.setInt(10, emp.getRole_id());
+		
+			insertStatement.setString(1, emp.getName());
+			insertStatement.setDouble(2, emp.getPhone_number());
+			insertStatement.setString(3, emp.getAddress());
+			insertStatement.setString(4, emp.getKin_id());
+			insertStatement.setDate(5, new java.sql.Date(emp.getDate_of_birth().getTime()));
+			insertStatement.setDate(6, new java.sql.Date(emp.getDate_of_joining().getTime()));
+			insertStatement.setInt(7, emp.getDept_id());
+			insertStatement.setInt(8, emp.getProject_id());
+			insertStatement.setInt(9, emp.getRole_id());
 			int rowsAffected = insertStatement.executeUpdate();
 			if (rowsAffected == 1)
 				return true;
@@ -123,8 +123,6 @@ public class EmployeeDaoImplForList1 implements IEmployeeDao {
 			ResultSet resultSet = getAllStatement.executeQuery();
 			if (!resultSet.next()) {
 
-				return null;
-
 			} else {
 
 				resultSet.beforeFirst();
@@ -135,10 +133,9 @@ public class EmployeeDaoImplForList1 implements IEmployeeDao {
 							resultSet.getInt(8), resultSet.getInt(9), resultSet.getInt(10)));
 
 				}
-				return empList;
 
 			}
-
+			return empList;
 		}
 
 	}

@@ -16,9 +16,10 @@ public interface IEmployeeService {
 
 	public boolean ModifyEmployee(int emp_id,Map<Integer,String> inputValues) throws IOException, SQLException;
 
-	public String SearchEmployee(int id) throws IOException, SQLException;
 	
 	public List<String> getAllEmployee() throws SQLException, IOException;
+
+	String SearchEmployee(Map<Integer, String> searchParameters) throws IOException, SQLException;
 
 
 }

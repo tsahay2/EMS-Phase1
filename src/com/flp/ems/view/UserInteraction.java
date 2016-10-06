@@ -23,18 +23,56 @@ public class UserInteraction {
 	Validate validate = new Validate();
 	Map<Integer, String> inputValues = new HashMap<>();
 
+	
+	
+	
+	/*----------------------ADD EMPLOYEE------------------------*/
+
 	public void AddEmployee() {
 
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
 
-		getName(inputValues);
+		System.out.println("Enter Name :");
+		name = sc.nextLine();
+
+		getName(inputValues, name);
+
+		System.out.println("Enter Mobile Number :");
+		phoneNumber = sc.nextLong();
+		sc.nextLine();
+
 		getPhoneNumber(inputValues);
+
+		System.out.println("Enter Address:");
+		address = sc.nextLine();
+
 		getAddress(inputValues);
+
+		System.out.println("Enter Date Of Birth(DD/MM/YYYY):");
+		dateOfBirth = sc.nextLine();
+
 		getDateOfBirth(inputValues);
+
+		System.out.println("Enter date of joining:");
+		dateOfJoining = sc.nextLine();
+
 		getDateOfJoining(inputValues);
+
+		System.out.println("Enter the department id : ");
+		dept_id = sc.nextInt();
+
 		getDepartmentId(inputValues);
+
+		System.out.println("Enter the Project id : ");
+		project_id = sc.nextInt();
+
 		getProjectId(inputValues);
+
+		System.out.println("Enter the Role id : ");
+		role_id = sc.nextInt();
+
 		getRoleId(inputValues);
+
 		boolean status = empService.AddEmployee(inputValues);
 		if (status)
 			System.out.println("Employee Added SuccessFully");
@@ -43,22 +81,86 @@ public class UserInteraction {
 
 	}
 
+	/*-------------------------MODIFY EMPLOYEES-------------------------*/
+
 	public void ModifyEmployee() throws IOException, SQLException {
 
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
 		Map<Integer, String> inputValues = new HashMap<>();
 		System.out.println("Enter the Employee Id : ");
 		int id = sc.nextInt();
+		sc.nextLine();
 
-		getName(inputValues);
-		getPhoneNumber(inputValues);
-		getAddress(inputValues);
-		getDateOfBirth(inputValues);
-		getDateOfJoining(inputValues);
-		getDepartmentId(inputValues);
-		getProjectId(inputValues);
-		getRoleId(inputValues);
-	
+		System.out.println("Enter Name :");
+		name = sc.nextLine();
+		if (name.equals("")) {
+			inputValues.put(1, "");
+		} else {
+			getName(inputValues, name);
+		}
+
+		System.out.println("Enter Mobile Number :");
+		String phoneNumber1 = sc.nextLine();
+		if (phoneNumber1.equals("")) {
+			inputValues.put(2, "");
+		} else {
+			phoneNumber = Long.parseLong(phoneNumber1);
+			getPhoneNumber(inputValues);
+		}
+
+		System.out.println("Enter Address:");
+		address = sc.nextLine();
+		if (address.equals("")) {
+			inputValues.put(3, "");
+		} else {
+			getAddress(inputValues);
+		}
+
+		System.out.println("Enter Date Of Birth(DD/MM/YYYY):");
+		dateOfBirth = sc.nextLine();
+		if (dateOfBirth.equals("")) {
+			inputValues.put(4, "");
+		} else {
+			getDateOfBirth(inputValues);
+		}
+
+		System.out.println("Enter date of joining:");
+		dateOfJoining = sc.nextLine();
+		if (dateOfJoining.equals("")) {
+			inputValues.put(5, "");
+		} else {
+			getDateOfJoining(inputValues);
+		}
+
+		System.out.println("Enter the department id : ");
+		String dept_id1 = sc.nextLine();
+
+		if (dept_id1.equals("")) {
+			inputValues.put(6, "");
+		} else {
+			dept_id = Integer.parseInt(dept_id1);
+			getDepartmentId(inputValues);
+		}
+
+		System.out.println("Enter the Project id : ");
+		String project_id1 = sc.nextLine();
+
+		if (project_id1.equals("")) {
+			inputValues.put(7, "");
+		} else {
+			project_id = sc.nextInt();
+			getProjectId(inputValues);
+		}
+
+		System.out.println("Enter the Role id : ");
+		String role_id1 = sc.nextLine();
+
+		if (role_id1.equals("")) {
+			inputValues.put(8, "");
+		} else {
+			role_id = Integer.parseInt(role_id1);
+			getRoleId(inputValues);
+		}
 
 		boolean status = empService.ModifyEmployee(id, inputValues);
 		if (status)
@@ -68,31 +170,49 @@ public class UserInteraction {
 
 	}
 
+	/*---------------------SEARCH EMPLOYEE-------------------------*/
+
 	public void SearchEmployee() throws IOException, SQLException {
 
+		
+		Map<Integer,String> searchParameters = new HashMap<>();
+		System.out.println("Enter Name : ");
+		String name = sc.nextLine();
+		searchParameters.put(1, name);
 		System.out.println("Enter the Employee Id : ");
 		int id = sc.nextInt();
+		searchParameters.put(2, String.valueOf(id));
+		sc.nextLine();
+		System.out.println("Enter the kin_id : ");
+		String kin_id = sc.nextLine();
+		searchParameters.put(3, String.valueOf(kin_id));
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
-		String searchedEmployee = empService.SearchEmployee(id);
+		String searchedEmployee = empService.SearchEmployee(searchParameters);
 		System.out.println(searchedEmployee);
 
 	}
+
+	/* --------------------- GET ALL EMPLOYEES ----------------------- */
 
 	public void getAllEmployee() throws SQLException, IOException {
 
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
 		List<String> listOfEmployee = empService.getAllEmployee();
+		if (listOfEmployee.size() == 0) {
 
-		for (String emp : listOfEmployee) {
+			System.out.println("There are no employees in the table!");
+		} else {
 
-			System.out.println(emp);
+			for (String emp : listOfEmployee) {
 
+				System.out.println(emp);
+
+			}
 		}
 
-		EmployeeDaoImplForList dao = new EmployeeDaoImplForList();
-		dao.printTree();
-
 	}
+
+	/*---------------------  REMOVE AN EMPLOYEE ----------------------- */
 
 	public void RemoveEmployee() throws IOException, SQLException {
 
@@ -103,25 +223,26 @@ public class UserInteraction {
 		if (status)
 			System.out.println("Employee deleted successfully!\n");
 		else
-			System.out.println("\n Sorry there was an error!");
+			System.out.println("\nSorry there was an error!");
 
 	}
 
-	public String getName(Map<Integer, String> inputValues) {
+	public String getName(Map<Integer, String> inputValues, String name) {
+
+		checked = true;
 		while (checked) {
-			System.out.println("Enter Name :");
-			name = sc.nextLine();
 
 			if (validate.validateName(name)) {
 				inputValues.put(1, name);
 				checked = false;
 
 			} else {
-				System.out.println("Incorrect Name. Please Re-Enter");
+				System.out.println("Incorrect Name. Please Re-Enter\n");
 			}
 
 		}
 		return name;
+
 	}
 
 	public long getPhoneNumber(Map<Integer, String> inputValues) {
@@ -129,10 +250,6 @@ public class UserInteraction {
 		checked = true;
 		while (checked) {
 
-			System.out.println("Enter Mobile Number :");
-			phoneNumber = sc.nextLong();
-			sc.nextLine();
-			System.out.println(String.valueOf(phoneNumber));
 			if (validate.validatePhone(String.valueOf(phoneNumber))) {
 				inputValues.put(2, String.valueOf(phoneNumber));
 				checked = false;
@@ -149,8 +266,6 @@ public class UserInteraction {
 
 	public String getAddress(Map<Integer, String> inputValues) {
 
-		System.out.println("Enter Address:");
-		address = sc.nextLine();
 		inputValues.put(3, address);
 		return address;
 
@@ -159,9 +274,8 @@ public class UserInteraction {
 	public String getDateOfBirth(Map<Integer, String> inputValues) {
 
 		checked = true;
+
 		while (checked) {
-			System.out.println("Enter Date Of Birth(DD/MM/YYYY):");
-			dateOfBirth = sc.nextLine();
 
 			if (validate.validateDate(dateOfBirth)) {
 				inputValues.put(4, dateOfBirth);
@@ -182,8 +296,6 @@ public class UserInteraction {
 
 		checked = true;
 		while (checked) {
-			System.out.println("Enter date of joining:");
-			dateOfJoining = sc.nextLine();
 
 			if (validate.validateDate(dateOfJoining)) {
 				inputValues.put(5, dateOfJoining);
@@ -202,8 +314,6 @@ public class UserInteraction {
 
 	public int getDepartmentId(Map<Integer, String> inputValues) {
 
-		System.out.println("Enter the department id : ");
-		dept_id = sc.nextInt();
 		inputValues.put(6, String.valueOf(dept_id));
 		return dept_id;
 
@@ -211,8 +321,6 @@ public class UserInteraction {
 
 	public int getProjectId(Map<Integer, String> inputValues) {
 
-		System.out.println("Enter the Project id : ");
-		project_id = sc.nextInt();
 		inputValues.put(7, String.valueOf(project_id));
 		return project_id;
 
@@ -220,8 +328,6 @@ public class UserInteraction {
 
 	public int getRoleId(Map<Integer, String> inputValues) {
 
-		System.out.println("Enter the Role id : ");
-		role_id = sc.nextInt();
 		inputValues.put(8, String.valueOf(role_id));
 		return role_id;
 
