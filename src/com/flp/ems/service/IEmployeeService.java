@@ -19,7 +19,7 @@ public interface IEmployeeService {
 	
 	public List<String> getAllEmployee() throws SQLException, IOException;
 
-	String SearchEmployee(Map<Integer, String> searchParameters) throws IOException, SQLException;
+	Map<Integer, String> SearchEmployee(Map<Integer, String> searchParameters) throws IOException, SQLException;
 
 
 }

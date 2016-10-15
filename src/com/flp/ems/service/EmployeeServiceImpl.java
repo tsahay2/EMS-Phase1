@@ -133,18 +133,22 @@ public class EmployeeServiceImpl implements IEmployeeService, Cloneable {
 	}
 
 	@Override
-	public String SearchEmployee(Map<Integer, String> searchParameters) throws IOException, SQLException {
+	public Map<Integer,String> SearchEmployee(Map<Integer, String> searchParameters) throws IOException, SQLException {
 		// TODO Auto-generated method stub
 		String employee;
 		EmployeeDaoImplForList1 empDao = new EmployeeDaoImplForList1();
-		
-		Employee emp = empDao.SearchEmployee(id);
+		Map<Integer,String> searchValues = new HashMap<>();
+		String id = searchParameters.get(2);
+		Employee emp = empDao.SearchEmployee(Integer.valueOf(id));
 		if (emp == null) {
 			System.out.println("Sorry, no employee found!");
 			return null;
 		} else {
-			employee = "Id :" + emp.getEmp_id() + " Name :" + emp.getName() + " Phone : " + emp.getPhone_number();
-			return employee;
+			searchValues.put(1, String.valueOf(emp.getEmp_id()));
+			searchValues.put(2, emp.getName());
+			searchValues.put(3, String.valueOf(emp.getPhone_number()));
+/*			employee = "Id :" + emp.getEmp_id() + " Name :" + emp.getName() + " Phone : " + emp.getPhone_number();
+*/			return searchValues;
 		}
 
 	}

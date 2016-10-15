@@ -144,7 +144,7 @@ public class EmployeeDaoImplForList1 implements IEmployeeDao {
 
 		props = new Properties();
 
-		FileInputStream fIn = new FileInputStream("dbDetails.properties");
+		FileInputStream fIn = new FileInputStream("D:/dev/demo/demos/eclipse-workspace/EMS/dbDetails.properties");
 		props.load(fIn);
 
 		// TODO LOAD AND REGISTER JDBC DRIVER
@@ -152,6 +152,14 @@ public class EmployeeDaoImplForList1 implements IEmployeeDao {
 		// String driver = props.getProperty("jdbc.driver");
 		// Class.forName(driver);
 
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
 		// TODO GET DATABASE CONENCTION USING JDBC URL
 
 		String url = props.getProperty("jdbc.url");

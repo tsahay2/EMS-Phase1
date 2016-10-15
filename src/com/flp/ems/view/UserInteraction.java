@@ -187,8 +187,8 @@ public class UserInteraction {
 		String kin_id = sc.nextLine();
 		searchParameters.put(3, String.valueOf(kin_id));
 		EmployeeServiceImpl empService = new EmployeeServiceImpl();
-		String searchedEmployee = empService.SearchEmployee(searchParameters);
-		System.out.println(searchedEmployee);
+	/*	String searchedEmployee = empService.SearchEmployee(searchParameters);
+		System.out.println(searchedEmployee);*/
 
 	}
 
